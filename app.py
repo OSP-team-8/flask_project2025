@@ -30,6 +30,20 @@ def reg_item_submit():
     image_file = request.files["file"]
     image_file.save("static/images/{}".format(image_file.filename))
     data = request.form
+
+    #결과 화면 로그 생성
+    print("====== 상품 등록 데이터 수신 ======")
+    print(f"Item name: {data.get('name')}")
+    print(f"Seller ID: {data.get('seller')}")
+    print(f"Address: {data.get('addr')}")
+    print(f"Email: {data.get('email')}")
+    print(f"Category: {data.get('category')}")
+    print(f"Credit Card?: {data.get('card')}")
+    print(f"Status: {data.get('status')}")
+    print(f"Phone: {data.get('phone')}")
+    print(f"Image Filename: {image_file.filename}")
+    print("===================================")
+    
     return render_template("submit_item_result.html", data = data,
                            img_path = "static/images/{}".format(image_file.filename))
 
