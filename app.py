@@ -31,7 +31,7 @@ def reg_item_submit():
     image_file.save("static/images/{}".format(image_file.filename))
     data = request.form
     return render_template("submit_item_result.html", data = data,
-                           img_path = "static/images/{}".format(imgae_file.filename))
+                           img_path = "static/images/{}".format(image_file.filename))
 
 if __name__ == "__main__":
     applicaiton.run(host="0.0.0.0")
