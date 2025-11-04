@@ -48,4 +48,4 @@ def reg_item_submit():
                            img_path = "static/images/{}".format(image_file.filename))
 
 if __name__ == "__main__":
-    applicaiton.run(host="0.0.0.0")
+    application.run(host="0.0.0.0")
