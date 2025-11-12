@@ -13,7 +13,13 @@ def hello():
 
 @application.route("/list")
 def view_list():
-    return render_template("list.html")
+    data = DB.get_items() #read the table
+    tot_count = len(data)
+    return render_template(
+        "list.html",
+        datas=data.items(),
+        total=tot_count
+    )
 
 @application.route("/review")
 def view_review():
@@ -30,6 +36,23 @@ def reg_review():
 @application.route("/login")
 def login():
     return render_template("login.html")
+
+@application.route("/login_confirm", methods=['POST'])
+def login_user():
+    id_=request.form['id']
+    pw=request.form['pw']
+    pw_hash = hashlib.sha256(pw.encode('utf-8')).hexdigest()
+    if DB.find_user(id_,pw_hash):
+        session['id']=id_
+        return redirect(url_for('view_list'))
+    else:
+        flash("Wrong ID or PW!")
+        return render_template("login.html")
+    
+@application.route("/logout")
+def logout_user():
+    session.clear()
+    return redirect(url_for('view_list'))
 
 @application.route("/signup")
 def signup():
