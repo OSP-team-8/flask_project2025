@@ -37,8 +37,6 @@ class DBhandler:
     else:
         return False
     
-
-
   def user_duplicate_check(self, id_string):
     users = self.db.child("user").get()
     print("users###",users.val())
@@ -52,7 +50,6 @@ class DBhandler:
             return False
         return True
     
-
   def find_user(self, id_, pw_):
     users = self.db.child("user").get()
     target_value=[]
@@ -65,3 +62,16 @@ class DBhandler:
   def get_items(self):
     items = self.db.child("item").get().val()
     return items
+  
+  def get_item_byname(self, name):
+      items = self.db.child("item").get()
+      target_value = ""
+      print("##########", name)
+
+      for res in items.each():
+          key_value = res.key()
+
+          if key_value == name:
+              target_value = res.val()
+
+      return target_value

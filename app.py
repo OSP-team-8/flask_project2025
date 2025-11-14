@@ -13,13 +13,48 @@ def hello():
 
 @application.route("/list")
 def view_list():
-    data = DB.get_items() #read the table
-    tot_count = len(data)
+    page = request.args.get("page", 0, type=int)
+
+    per_page = 6      # 한 페이지에 보여줄 아이템 개수
+    per_row = 3       # 한 행에 보여줄 아이템 개수
+
+    # 1. 전체 아이템(dict) 가져오기
+    all_data = DB.get_items() or {}   # 혹시 None이면 빈 dict로
+    item_counts = len(all_data)
+
+    # 2. 이 페이지에서 보여줄 구간 계산
+    start_idx = page * per_page
+    end_idx = start_idx + per_page
+
+    # dict → list로 바꿔서 슬라이싱
+    page_items = list(all_data.items())[start_idx:end_idx]
+    # page_items: [(key1, value1), (key2, value2), ...]
+
+    # 3. 행(row) 단위로 자르기
+    row1_items = page_items[0:per_row]               # 0~2
+    row2_items = page_items[per_row:per_row*2]       # 3~5
+
+    # 4. 페이지 개수 계산 (올림 사용)
+    import math
+    page_count = math.ceil(item_counts / per_page) if item_counts > 0 else 1
+
     return render_template(
         "list.html",
-        datas=data.items(),
-        total=tot_count
+        # 템플릿에서는 그대로 for key, value in row1 / row2 사용 가능
+        row1=row1_items,
+        row2=row2_items,
+        total=item_counts,
+        page=page,
+        page_count=page_count,
     )
+
+
+@application.route("/view_detail/<name>/")
+def view_item_detail(name):
+     print("##name:", name)
+     data = DB.get_item_byname(str(name))
+     print("####data:", data)
+     return render_template("detail.html", name = name, data = data)
 
 @application.route("/review")
 def view_review():
