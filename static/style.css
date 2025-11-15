@@ -271,3 +271,45 @@ form.login_form {
   font-size: 14px;
   color: var(--text);
 }
+
+/* ====== 상품 리스트 화면 ====== */
+
+.list-wrapper{
+  margin-top: 16px;
+}
+
+.list-title{
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+/* 테이블을 가운데 정렬 + 간격 주기 */
+.product-table{
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 16px;   /* 행 사이 간격 */
+  text-align: center;
+}
+
+/* 상품 이름 줄 */
+.product-row-name td{
+  padding-bottom: 6px;
+  font-weight: 500;
+}
+
+/* 이미지 줄 */
+.product-row-img td{
+  padding: 8px 12px;
+}
+
+.product-row-img img{
+  box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+
+/* 호버 시 살짝 떠오르는 느낌 */
+.product-row-img td:hover img{
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0,0,0,.16);
+}

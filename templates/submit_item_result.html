@@ -1,28 +1,37 @@
-<p>
-  Seller {{data.seller}} sells {{data.name}} and its category is {{data.category}}.
-  The item is 
-  {% if data['status'] == "lnew" %}
-    likely new!
-  {% endif %}
-  {% if data['status'] == "new" %}
-    new!
-  {% endif %}
-  {% if data['status'] == "used" %}
-    used!
-  {% endif %}
-</p>
-<img src="{{img_path}}" width="300"/>
-<p>
-  Contact via {{data.email}} or {{data.phone}} if you are interested!
-  The address is {{data.addr}}
-</p>
+{% extends "index.html" %}
 
-<p>
-  For payment, the credit card is 
-  {% if data['card'] == "Y" %}
-    accepted!
-  {% endif %}
-  {% if data['card'] == "N" %}
-    NOT accepted!
-  {% endif %}
-</p>
+{% block section %}
+  <h2>등록된 리뷰 조회 화면 입니다.</h2>
+  
+  <p>
+    Seller <b>{{ data.seller }}</b> sells <b>{{ data.name }}</b>
+    and its category is <b>{{ data.category }}</b>.
+  </p>
+
+  <p>
+    The item is
+    {% if data['status'] == "lnew" %}
+      <b>likely new!</b>
+    {% elif data['status'] == "new" %}
+      <b>new!</b>
+    {% elif data['status'] == "used" %}
+      <b>used!</b>
+    {% endif %}
+  </p>
+
+  <img src="{{ img_path }}" width="300"/>
+
+  <p>
+    Contact via <b>{{ data.email }}</b> or <b>{{ data.phone }}</b> if you are interested!  
+    The address is <b>{{ data.addr }}</b>.
+  </p>
+
+  <p>
+    For payment, the credit card is
+    {% if data['card'] == "Y" %}
+      <b>accepted!</b>
+    {% elif data['card'] == "N" %}
+      <b>NOT accepted!</b>
+    {% endif %}
+  </p>
+{% endblock section %}
