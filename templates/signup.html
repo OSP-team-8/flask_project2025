@@ -1,0 +1,16 @@
+{% extends "index.html" %}
+
+{% block section %}
+{% with mesg = get_flashed_messages() %}
+{% if mesg !=[] %}
+    <script>alert("{{ mesg[0] }}")</script>
+{% endif %}
+{% endwith %}
+<form method="post" action="/signup_post" class="login-form">
+    <p class="login_itemName">ID : <input type="text" name = "id" class="login-input" required></p>
+    <p class="login_itemName">password : <input type="password" name = "pw" class="login-input" required></p>
+    <p class="login_itemName">Nickname : <input type="text" name = "nickname" class="login-input"></p>
+    <p>아이디와 비밀번호를 입력하고 생성버튼을 누르세요.<br>
+<input type = "submit" value = "생성" class="login-divider"/> </p>
+</form>
+{% endblock section %}
