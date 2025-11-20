@@ -1,29 +1,30 @@
 {% extends "index.html" %}
 
 {% block section %}
-  
+<div class="list-wrapper card">
   {% if total > 0 %}
-  <p>
-    현재까지 {{total}}개 리뷰 등록됨
+  <p class="list-title">
+    리뷰 리스트 --현재까지 {{total}}개 리뷰 등록됨
   </p>
-  <table>
-    <tr>
-    {% for key, value in row1 %}
-      <td>제목: {{value.title}}</td>
-    {% endfor %}
+  <table class="product-table">
+    <tr class="product-row-name">
+      {% for key, value in row1 %}
+        <td>제목: {{value.title}}</td>
+      {% endfor %}
     </tr>
-    <tr>
-    {% for key, value in row1 %}
-      <td onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;"><img src="static/images/{{value.img_path}}", width=240,
-    height=200></td>
-    {% endfor %}
+    <tr class="product-row-img">
+      {% for key, value in row1 %}
+        <td onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;">
+          <img src="static/images/{{value.img_path}}", width=240, height=200>
+        </td>
+      {% endfor %}
     </tr>
-    <tr>
+    <tr class="product-row-name">
     {% for key, value in row2 %}
       <td>제목: {{value.title}}</td>
     {% endfor %}
     </tr>
-    <tr>
+    <tr class="product-row-img">
     {% for key, value in row2 %}
       <td onclick="location.href='/view_review_detail/{{key}}/';" style="cursor:pointer;"><img src="static/images/{{value.img_path}}", width=240, h
     eight=200></td>
@@ -48,4 +49,5 @@
   </p>
   {% endif %}
 
+</div>  
 {% endblock section %}

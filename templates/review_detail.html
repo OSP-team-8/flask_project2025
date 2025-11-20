@@ -1,18 +1,9 @@
 {% extends "index.html" %}
 
 {% block section %}
-  <p>item name is <b>{{name}}</b> and address is {{data.addr}}</p>
+  <p>item name is <b>{{name}}</b> and review title is {{data.title}}</p>
 
-  <p>item tel. is {{data.phone}} and category is {{data.category}}</p>
+  <p>item star scope is {{data.rate}} and review contents is {{data.review}}</p>
 
-  <p>
-    For payment, the credit card is 
-    {% if data['card'] == "Y" %}
-    accepted!
-    {% endif %}
-    {% if data['card'] == "N" %}
-    NOT accepted!
-    {% endif %}
-  </p>
   <img src="../../static/images/{{data.img_path}}", width=140, height=200>
   {% endblock section %}

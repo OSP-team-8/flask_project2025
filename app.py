@@ -60,6 +60,10 @@ def view_item_detail(name):
 
 
 # 리뷰 등록 화면 
+@application.route("/reg_reviews")
+def reg_reviews():
+    return render_template("reg_reviews.html")
+
 @application.route("/reg_review_init/<name>/")
 def reg_review_init(name):
     return render_template("reg_reviews.html", name=name)
